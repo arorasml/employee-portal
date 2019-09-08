@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
 
-import com.myproject.employee.controller.EmployeeController;
 import com.myproject.employee.dto.EmployeeDTO;
 import com.myproject.employee.service.EmployeeService;
 

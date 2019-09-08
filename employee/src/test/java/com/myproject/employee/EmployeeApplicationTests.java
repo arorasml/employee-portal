@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.myproject.employee.entity.Employee;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = EmployeeApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EmployeeApplicationTests {
@@ -42,7 +41,27 @@ public class EmployeeApplicationTests {
 		HttpEntity<List<Employee>> entity = new HttpEntity<>(null, headers);
 		ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/v1/getEmployees", HttpMethod.GET, entity,
 				String.class);
-		Assert.assertNotNull(response.getBody());
+		Assert.assertEquals(200, response.getStatusCodeValue());
 	}
-
+	
+	@Test
+	public void testGetSortedEmployees_Success() {
+		HttpHeaders headers = new HttpHeaders();
+		String sortByString = "name";
+		HttpEntity<List<Employee>> entity = new HttpEntity<>(null, headers);
+		ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/v1/getSortedEmployees/?sortBy=" +sortByString, HttpMethod.GET, entity,
+				String.class);
+		Assert.assertEquals(200, response.getStatusCodeValue());
+	}
+	
+	@Test()
+	public void testGetSortedEmployees_Exception() {
+		HttpHeaders headers = new HttpHeaders();
+		String sortByString = "random";
+		HttpEntity<List<Employee>> entity = new HttpEntity<>(null, headers);
+		ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/v1/getSortedEmployees/?sortBy=" +sortByString, HttpMethod.GET, entity,
+				String.class);
+		Assert.assertEquals(400, response.getStatusCodeValue());
+	}
+	
 }
