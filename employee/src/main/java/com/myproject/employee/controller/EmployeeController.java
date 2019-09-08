@@ -35,10 +35,5 @@ public class EmployeeController {
 	public List<Employee> getEmployees(@RequestParam(value = "sortBy",defaultValue= "") String sortBy) {
 		return service.getEmployees(sortBy);
 	}
-	
-	@PostMapping
-	public void postEmployees(@RequestBody EmployeeDTO dto) {
-		service.add(dto);
-	}
 
 }
